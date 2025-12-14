@@ -1,0 +1,43 @@
+# 所有文本文件使用LF换行符
+* text=auto eol=lf
+
+# 源文件使用LF
+*.cpp text eol=lf
+*.h text eol=lf
+*.hpp text eol=lf
+*.c text eol=lf
+
+# 配置文件使用LF
+*.txt text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+
+# Windows 相关文件使用CRLF
+*.rc text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# CMake文件使用LF
+CMakeLists.txt text eol=lf
+*.cmake text eol=lf
+
+# 二进制文件不处理
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.exe binary
+*.dll binary
+*.so binary
+*.lib binary
+*.a binary
+
+# 特定文件不处理
+.gitattributes export-ignore
+.gitignore export-ignore
