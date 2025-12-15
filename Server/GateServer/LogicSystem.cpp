@@ -7,7 +7,9 @@
 #include <boost/beast/core/ostream.hpp>
 
 #include "HttpConnection.h"
+#include "VerifyGrpcClient.h"
 #include "const.h"
+#include "message.pb.h"
 
 LogicSystem::LogicSystem() {
   RegGet("/get_test", [](std::shared_ptr<HttpConnection> connection) {
@@ -47,9 +49,11 @@ LogicSystem::LogicSystem() {
     }
 
     auto email = src_root["email"].asString();
+    message::GetVarifyRsp rsp =
+        VerifyGrpcClient::GetInstance()->GetVerifyCode(email);
     std::cout << "email is " << email << std::endl;
 
-    root["error"] = 0;
+    root["error"] = rsp.error();
     root["email"] = src_root["email"];
     std::string jsonstr = root.toStyledString();
     boost::beast::ostream(connection->_response.body()) << jsonstr;

@@ -7,6 +7,9 @@
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
 #include <boost/beast/http.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 #include <chrono>
 #include <functional>
 #include <iostream>
@@ -14,6 +17,7 @@
 #include <memory>
 #include <mutex>
 
+#include "ConfigMgr.h"
 #include "Singleton.hpp"
 
 enum ErrorCodes {
@@ -21,3 +25,6 @@ enum ErrorCodes {
   Error_Json = 1001,
   RPCFailed = 1002,
 };
+
+class ConfigMgr;
+extern ConfigMgr gCfgMgr;

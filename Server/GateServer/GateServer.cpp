@@ -11,8 +11,13 @@
 #include <iostream>
 
 #include "CServer.h"
+#include "ConfigMgr.h"
 
 int main() {
+  ConfigMgr gCfgMgr;
+  std::string gate_port_str = gCfgMgr["GateServer"]["Port"];
+  unsigned short gate_port = atoi(gate_port_str.c_str());
+
   try {
     boost::asio::io_context ioc{1};
 
