@@ -1,0 +1,39 @@
+CompileFlags:
+  Add: 
+    - -std=c++23
+    - -Wall
+    - -Wextra
+    - -Wpedantic
+    - -I${workspaceFolder}
+  CompilationDatabase: build
+  
+Completion:
+  Enable: true
+  Details: false
+  Trigger: "."
+  Index:
+    Background: build
+
+Diagnostics:
+  ClangTidy:
+    Add: [
+      "clang-analyzer-*", 
+      "modernize-*", 
+      "performance-*", 
+    ]
+    CheckOptions:
+      modernize-use-trailing-return-type: 0
+      readability-identifier-length: 0
+
+Index:
+  Background: Build
+
+InlayHints:
+  Enabled: true
+  BlockEnd: true
+  Designators: true
+  ParameterNames: true
+  DeducedTypes: true
+
+Hover:
+  ShowAKA: true

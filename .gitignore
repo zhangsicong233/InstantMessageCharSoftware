@@ -1,0 +1,51 @@
+# Qt
+*.pro.user
+*.pro.user.*
+*.qmlc
+*.jsc
+*.o
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qm
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CMakeUserPresets.json
+*.cmake
+
+# 构建目录
+build/
+*/build/
+*/*/build/
+Debug/
+Release/
+x64/
+x86/
+*.sln
+*.vcxproj*
+*.vcproj*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 可执行文件
+*.exe
+*.app
+*.dll
+*.so
+*.dylib
+
+# 临时文件
+*.autosave
+*.backup
