@@ -7,7 +7,17 @@
 LogicSystem::LogicSystem() {
   RegGet("/get_test", [](std::shared_ptr<HttpConnection> connection) {
     boost::beast::ostream(connection->_response.body())
-        << "recvive get_test req";
+        << "recvive get_test req" << std::endl;
+
+    int cnt = 0;
+    for (const auto& elem : connection->_get_params) {
+      ++cnt;
+
+      boost::beast::ostream(connection->_response.body())
+          << "param " << cnt << "key is " << elem.first;
+      boost::beast::ostream(connection->_response.body())
+          << ", value is " << elem.second << std::endl;
+    }
   });
 }
 

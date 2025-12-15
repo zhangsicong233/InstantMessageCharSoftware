@@ -20,7 +20,11 @@ class HttpConnection : public std::enable_shared_from_this<HttpConnection> {
   boost::asio::steady_timer _deadline{_socket.get_executor(),
                                       std::chrono::seconds(60)};
 
+  std::string _get_url;
+  std::unordered_map<std::string, std::string> _get_params;
+
   void CheckDeadline();
   void WriteResponse();
   void HandleReq();
+  void PreParseGetParam();
 };
