@@ -48,4 +48,8 @@ x86/
 
 # 临时文件
 *.autosave
+<<<<<<< HEAD
 *.backup
+=======
+*.backup
+>>>>>>> c752162bf2afa53ba6f113742a4419497d00d4c0
