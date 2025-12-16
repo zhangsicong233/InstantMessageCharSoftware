@@ -1,9 +1,10 @@
 #include "HttpConnection.h"
 
+#include <boost/asio/io_context.hpp>
+
 #include "LogicSystem.h"
 
-HttpConnection::HttpConnection(boost::asio::ip::tcp::socket socket)
-    : _socket(std::move(socket)) {}
+HttpConnection::HttpConnection(boost::asio::io_context& ioc) : _socket(ioc) {}
 
 void HttpConnection::Start() {
   auto self = shared_from_this();
@@ -26,6 +27,8 @@ void HttpConnection::Start() {
         }
       });
 }
+
+boost::asio::ip::tcp::socket& HttpConnection::GetSocket() { return _socket; }
 
 unsigned char ToHex(unsigned char x) { return x > 9 ? x + 55 : x + 48; }
 

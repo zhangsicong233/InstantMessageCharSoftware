@@ -24,6 +24,7 @@ add_executable(gateserver
     LogicSystem.cpp
     ConfigMgr.cpp
     VerifyGrpcClient.cpp
+    AsioIOContextPool.cpp
     message.grpc.pb.cc
     message.pb.cc
 )

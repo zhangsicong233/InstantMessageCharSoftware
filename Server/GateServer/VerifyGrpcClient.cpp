@@ -1,9 +1,13 @@
 #include "VerifyGrpcClient.h"
 
+#include "ConfigMgr.h"
+
 VerifyGrpcClient::VerifyGrpcClient() {
-  std::shared_ptr<grpc::Channel> channel = grpc::CreateChannel(
-      "127.0.0.1:50051", grpc::InsecureChannelCredentials());
-  _stub = message::VarifyService::NewStub(channel);
+  auto& gCfgMgr = ConfigMgr::Inst();
+  std::string host = gCfgMgr["VarifyServer"]["Host"];
+  std::string port = gCfgMgr["VarifyServer"]["Port"];
+
+  _pool.reset(new RPCConPool(5, host, port));
 }
 
 message::GetVarifyRsp VerifyGrpcClient::GetVerifyCode(std::string email) {
@@ -12,10 +16,15 @@ message::GetVarifyRsp VerifyGrpcClient::GetVerifyCode(std::string email) {
   message::GetVarifyReq request;
   request.set_email(email);
 
-  grpc::Status status = _stub->GetVarifyCode(&context, request, &reply);
+  auto stub = _pool->getConnection();
+  grpc::Status status = stub->GetVarifyCode(&context, request, &reply);
   if (status.ok()) {
+    _pool->returnConnection(std::move(stub));
+
     return reply;
   } else {
+    _pool->returnConnection(std::move(stub));
+
     reply.set_error(ErrorCodes::RPCFailed);
 
     return reply;

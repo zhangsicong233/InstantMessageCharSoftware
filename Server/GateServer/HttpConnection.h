@@ -1,14 +1,18 @@
 #pragma once
 
+#include <boost/asio/io_context.hpp>
+#include <boost/asio/ip/tcp.hpp>
+
 #include "const.h"
 
 class HttpConnection : public std::enable_shared_from_this<HttpConnection> {
   friend class LogicSystem;
 
  public:
-  HttpConnection(boost::asio::ip::tcp::socket socket);
+  HttpConnection(boost::asio::io_context& ioc);
 
   void Start();
+  boost::asio::ip::tcp::socket& GetSocket();
 
  private:
   boost::asio::ip::tcp::socket _socket;
