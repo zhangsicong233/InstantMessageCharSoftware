@@ -48,3 +48,9 @@ config_file.path = $$OUT_PWD/bin
 config_file.files = $$PWD/config.ini
 CONFIG += file_copies
 COPIES += config_file
+
+# 确保UI_DIR目录存在
+create_ui_dir.target = $$UI_DIR
+create_ui_dir.commands = $$QMAKE_MKDIR $$create_ui_dir.target
+QMAKE_EXTRA_TARGETS += create_ui_dir
+PRE_TARGETDEPS += $$UI_DIR
