@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ConfigMgr.h"
 #include "Singleton.hpp"
 #include "const.h"
 
@@ -77,8 +78,6 @@ class RedisConPool {
   ~RedisConPool() {
     std::lock_guard<std::mutex> lock(_mutex);
     while (!_connections.empty()) {
-      redisFree(_connections.front());
-
       _connections.pop();
     }
   }
