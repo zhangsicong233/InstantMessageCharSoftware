@@ -1,5 +1,6 @@
 #pragma once
 
+#include <hiredis/hiredis.h>
 #include <jsoncpp/json/json.h>
 #include <jsoncpp/json/reader.h>
 #include <jsoncpp/json/value.h>

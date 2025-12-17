@@ -12,6 +12,7 @@
 
 #include "CServer.h"
 #include "ConfigMgr.h"
+#include "RedisMgr.h"
 
 int main() {
   auto& gCfgMgr = ConfigMgr::Inst();

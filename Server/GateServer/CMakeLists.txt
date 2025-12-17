@@ -15,6 +15,8 @@ find_package(gRPC REQUIRED)
 # 查找jsoncpp
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp REQUIRED)
+# 查找hiredis
+pkg_check_modules(HIREDIS hiredis REQUIRED)
 
 # 添加可执行文件
 add_executable(gateserver
@@ -25,6 +27,7 @@ add_executable(gateserver
     ConfigMgr.cpp
     VerifyGrpcClient.cpp
     AsioIOContextPool.cpp
+    RedisMgr.cpp
     message.grpc.pb.cc
     message.pb.cc
 )
@@ -32,12 +35,14 @@ add_executable(gateserver
 # 包含目录
 target_include_directories(gateserver PRIVATE .)
 target_include_directories(gateserver SYSTEM PRIVATE ${JSONCPP_INCLUDE_DIRS})
+target_include_directories(gateserver SYSTEM PRIVATE ${HIREDIS_INCLUDE_DIRS})
 target_include_directories(gateserver SYSTEM PRIVATE ${Protobuf_INCLUDE_DIRS})
 target_include_directories(gateserver SYSTEM PRIVATE ${gRPC_INCLUDE_DIRS})
 
 # 链接库
 target_link_libraries(gateserver PRIVATE Boost::boost Boost::system Boost::filesystem)
 target_link_libraries(gateserver PRIVATE ${JSONCPP_LIBRARIES})
+target_link_libraries(gateserver PRIVATE ${HIREDIS_LIBRARIES})
 target_link_libraries(gateserver PRIVATE ${Protobuf_LIBRARIES})
 target_link_libraries(gateserver PRIVATE gRPC::grpc gRPC::grpc++)
 
