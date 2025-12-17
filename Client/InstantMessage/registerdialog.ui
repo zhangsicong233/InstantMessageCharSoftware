@@ -220,7 +220,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
            <item>
-            <widget class="QLabel" name="varify_edit">
+            <widget class="QLabel" name="varify_label">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -239,7 +239,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="varify_label">
+            <widget class="QLineEdit" name="varify_edit">
              <property name="minimumSize">
               <size>
                <width>0</width>

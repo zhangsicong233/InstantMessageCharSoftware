@@ -150,6 +150,7 @@ void RegisterDialog::on_sure_btn_clicked()
   json_obj["passwd"] = ui->pass_edit->text();
   json_obj["confirm"] = ui->confirm_edit->text();
   json_obj["varifycode"] = ui->varify_edit->text();
+  qDebug() << json_obj["varifycode"].toString();
   HttpMgr::GetInstance()->PostHttpReq(QUrl(gate_url_prefix+"/user_register"),
                                       json_obj, ReqId::ID_REG_USER,Modules::REGISTERMOD);
 }
