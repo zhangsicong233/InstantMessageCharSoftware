@@ -21,6 +21,7 @@ class MainWindow : public QMainWindow {
 
  public slots:
   void SlotSwitchReg();
+  void SlotSwitchLogin();
 
  private:
   Ui::MainWindow* ui;

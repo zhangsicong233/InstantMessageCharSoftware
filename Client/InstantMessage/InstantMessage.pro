@@ -19,6 +19,7 @@ CONFIG(debug, debug|release) {
 
 SOURCES += \
     HttpMgr.cpp \
+    clickedlabel.cpp \
     global.cpp \
     logindialog.cpp \
     main.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 HEADERS += \
     HttpMgr.h \
     Singleton.hpp \
+    clickedlabel.h \
     global.h \
     logindialog.h \
     mainwindow.h \

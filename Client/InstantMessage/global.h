@@ -28,10 +28,25 @@ enum Modules {
   REGISTERMOD = 0,
 };
 
+enum TipErr{
+  TIP_SUCCESS = 0,
+  TIP_EMAIL_ERR = 1,
+  TIP_PWD_ERR = 2,
+  TIP_CONFIRM_ERR = 3,
+  TIP_PWD_CONFIRM = 4,
+  TIP_VARIFY_ERR = 5,
+  TIP_USER_ERR = 6
+};
+
 enum ErrorCodes {
   SUCCESS = 0,
   ERR_JSON = 1,     // json 解析失败
   ERR_NETWORK = 2,  // 网络错误
+};
+
+enum ClickLbState{
+  Normal = 0,
+  Selected = 1
 };
 
 extern QString gate_url_prefix;
