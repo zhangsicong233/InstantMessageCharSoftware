@@ -6,6 +6,7 @@ const RedisCli = new Redis({
     host: config_module.redis_host,       // Redis服务器主机名
     port: config_module.redis_port,        // Redis服务器端口号
     password: config_module.redis_passwd, // Redis密码
+    tls: null, // 显式禁用TLS，防止SSL错误
 });
 
 /**

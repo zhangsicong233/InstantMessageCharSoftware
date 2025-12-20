@@ -7,6 +7,7 @@
 #include <boost/beast/core/ostream.hpp>
 
 #include "HttpConnection.h"
+#include "MysqlMgr.h"
 #include "RedisMgr.h"
 #include "VerifyGrpcClient.h"
 #include "const.h"
@@ -123,6 +124,16 @@ LogicSystem::LogicSystem() {
     }
 
     // 查找数据库判断用户是否存在
+    int uid = MysqlMgr::GetInstance()->RegUser(name, email, pwd);
+    if (uid == 0 || uid == -1) {
+      std::cout << " user or email exist" << std::endl;
+      root["error"] = ErrorCodes::UserExist;
+      std::string jsonstr = root.toStyledString();
+      boost::beast::ostream(connection->_response.body()) << jsonstr;
+
+      return true;
+    }
+
     root["error"] = 0;
     root["email"] = email;
     root["user"] = name;

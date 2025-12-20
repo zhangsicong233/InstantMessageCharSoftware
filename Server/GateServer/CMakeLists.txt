@@ -17,6 +17,12 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp REQUIRED)
 # 查找hiredis
 pkg_check_modules(HIREDIS hiredis REQUIRED)
+# 查找 MySQL Connector/C++
+find_path(MYSQLCPPCONN_INCLUDE_DIR mysql_connection.h PATH_SUFFIXES mysql)
+find_library(MYSQLCPPCONN_LIBRARY NAMES mysqlcppconn)
+if (NOT MYSQLCPPCONN_INCLUDE_DIR OR NOT MYSQLCPPCONN_LIBRARY)
+    message(FATAL_ERROR "MySQL Connector/C++ not found")
+endif()
 
 # 添加可执行文件
 add_executable(gateserver
@@ -28,6 +34,8 @@ add_executable(gateserver
     VerifyGrpcClient.cpp
     AsioIOContextPool.cpp
     RedisMgr.cpp
+    MysqlDao.cpp
+    MysqlMgr.cpp
     message.grpc.pb.cc
     message.pb.cc
 )
@@ -38,6 +46,7 @@ target_include_directories(gateserver SYSTEM PRIVATE ${JSONCPP_INCLUDE_DIRS})
 target_include_directories(gateserver SYSTEM PRIVATE ${HIREDIS_INCLUDE_DIRS})
 target_include_directories(gateserver SYSTEM PRIVATE ${Protobuf_INCLUDE_DIRS})
 target_include_directories(gateserver SYSTEM PRIVATE ${gRPC_INCLUDE_DIRS})
+target_include_directories(gateserver SYSTEM PRIVATE ${MYSQLCPPCONN_INCLUDE_DIR})
 
 # 链接库
 target_link_libraries(gateserver PRIVATE Boost::boost Boost::system Boost::filesystem)
@@ -45,6 +54,7 @@ target_link_libraries(gateserver PRIVATE ${JSONCPP_LIBRARIES})
 target_link_libraries(gateserver PRIVATE ${HIREDIS_LIBRARIES})
 target_link_libraries(gateserver PRIVATE ${Protobuf_LIBRARIES})
 target_link_libraries(gateserver PRIVATE gRPC::grpc gRPC::grpc++)
+target_link_libraries(gateserver PRIVATE ${MYSQLCPPCONN_LIBRARY})
 
 # 线程库
 find_package(Threads REQUIRED)

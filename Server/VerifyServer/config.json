@@ -4,9 +4,9 @@
         "pass": "itouvvthqepbdfea"
     },
     "mysql": {
-        "host": "81.68.86.146",
+        "host": "127.0.0.1",
         "port": 3306,
-        "passwd": "123456"
+        "passwd": "ASDFGhjkl;123"
     },
     "redis": {
         "host": "81.68.86.146",

@@ -20,6 +20,7 @@
 #include <memory>
 #include <mutex>
 #include <queue>
+#include <thread>
 
 #include "Singleton.hpp"
 
@@ -38,4 +39,17 @@ enum ErrorCodes {
   PasswdInvalid = 1009,   // 密码更新失败
   TokenInvalid = 1010,    // Token失效
   UidInvalid = 1011,      // uid无效
+};
+
+// Defer类
+class Defer {
+ public:
+  // 接受一个lambda表达式或者函数指针
+  Defer(std::function<void()> func) : _func(func) {}
+
+  // 析构函数中执行传入的函数
+  ~Defer() { _func(); }
+
+ private:
+  std::function<void()> _func;
 };

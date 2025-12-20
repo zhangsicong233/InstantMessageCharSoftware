@@ -7,7 +7,7 @@ const config_module = require("./config")
 let transport = nodemailer.createTransport({
     host: 'smtp.qq.com',
     port: 587,
-    secure: true,
+    secure: false, // 587端口使用STARTTLS，secure应为false
     auth: {
         user: config_module.email_user, // 发送方邮箱地址
         pass: config_module.email_pass // 邮箱授权码或者密码
