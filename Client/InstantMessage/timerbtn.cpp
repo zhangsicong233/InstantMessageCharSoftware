@@ -1,15 +1,15 @@
 #include "timerbtn.h"
-#include <QMouseEvent>
-#include <QDebug>
 
-TimerBtn::TimerBtn(QWidget *parent):QPushButton(parent),_counter(10)
-{
+#include <QDebug>
+#include <QMouseEvent>
+
+TimerBtn::TimerBtn(QWidget* parent) : QPushButton(parent), _counter(10) {
   _timer = new QTimer(this);
 
-  connect(_timer, &QTimer::timeout, [this](){
+  connect(_timer, &QTimer::timeout, [this]() {
     --_counter;
 
-    if(_counter <= 0){
+    if (_counter <= 0) {
       _timer->stop();
       _counter = 10;
       this->setText("获取");
@@ -22,13 +22,9 @@ TimerBtn::TimerBtn(QWidget *parent):QPushButton(parent),_counter(10)
   });
 }
 
-TimerBtn::~TimerBtn()
-{
-  _timer->stop();
-}
+TimerBtn::~TimerBtn() { _timer->stop(); }
 
-void TimerBtn::mouseReleaseEvent(QMouseEvent *e)
-{
+void TimerBtn::mouseReleaseEvent(QMouseEvent* e) {
   if (e->button() == Qt::LeftButton) {
     // 在这里处理鼠标左键释放事件
     qDebug() << "MyButton was released!";

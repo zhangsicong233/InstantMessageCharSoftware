@@ -4,14 +4,15 @@
 #include <QPushButton>
 #include <QTimer>
 
-class TimerBtn : public QPushButton{
+class TimerBtn : public QPushButton {
  public:
-  TimerBtn(QWidget *parent = nullptr);
+  TimerBtn(QWidget* parent = nullptr);
 
   // 重写mouseReleaseEvent
-  virtual void mouseReleaseEvent(QMouseEvent *e) override;
+  virtual void mouseReleaseEvent(QMouseEvent* e) override;
 
   ~TimerBtn();
+
  private:
   QTimer* _timer;
   int _counter;
