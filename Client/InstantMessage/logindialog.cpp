@@ -21,7 +21,7 @@ LoginDialog::LoginDialog(QWidget* parent)
   initHead();
   initHttpHandlers();
 
-          //连接登录回包信号
+  // 连接登录回包信号
   connect(HttpMgr::GetInstance().get(), &HttpMgr::sig_login_mod_finish, this,
           &LoginDialog::slot_login_mod_finish);
 }
@@ -194,33 +194,31 @@ void LoginDialog::on_login_btn_clicked() {
                                       Modules::LOGINMOD);
 }
 
-void LoginDialog::slot_login_mod_finish(ReqId id, QString res, ErrorCodes err)
-{
-  if(err != ErrorCodes::SUCCESS){
-    showTip(tr("网络请求错误"),false);
+void LoginDialog::slot_login_mod_finish(ReqId id, QString res, ErrorCodes err) {
+  if (err != ErrorCodes::SUCCESS) {
+    showTip(tr("网络请求错误"), false);
 
     return;
   }
 
-          // 解析 JSON 字符串,res需转化为QByteArray
+  // 解析 JSON 字符串,res需转化为QByteArray
   QJsonDocument jsonDoc = QJsonDocument::fromJson(res.toUtf8());
 
-  //json解析错误
-  if(jsonDoc.isNull()){
-    showTip(tr("json解析错误"),false);
+  // json解析错误
+  if (jsonDoc.isNull()) {
+    showTip(tr("json解析错误"), false);
 
     return;
   }
 
-          //json解析错误
-  if(!jsonDoc.isObject()){
-    showTip(tr("json解析错误"),false);
+  // json解析错误
+  if (!jsonDoc.isObject()) {
+    showTip(tr("json解析错误"), false);
 
     return;
   }
 
-
-          //调用对应的逻辑,根据id回调。
+  // 调用对应的逻辑,根据id回调。
   _handlers[id](jsonDoc.object());
 
   return;

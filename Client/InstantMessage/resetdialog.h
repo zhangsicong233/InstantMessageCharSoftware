@@ -25,14 +25,14 @@ class ResetDialog : public QDialog {
   bool checkPassValid();
   void showTip(QString str, bool b_ok);
   bool checkEmailValid();
-  bool checkVarifyValid();
+  bool checkVerifyValid();
   void AddTipErr(TipErr te, QString tips);
   void DelTipErr(TipErr te);
   void initHandlers();
 
  private slots:
   void on_return_btn_clicked();
-  void on_varify_btn_clicked();
+  void on_verify_btn_clicked();
   void slot_reset_mod_finish(ReqId id, QString res, ErrorCodes err);
   void on_sure_btn_clicked();
 

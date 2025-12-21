@@ -36,7 +36,7 @@ class LoginDialog : public QDialog {
  private slots:
   void slot_forget_pwd();
   void on_login_btn_clicked();
-      void slot_login_mod_finish(ReqId id, QString res, ErrorCodes err);
+  void slot_login_mod_finish(ReqId id, QString res, ErrorCodes err);
 
  signals:
   void switchRegister();

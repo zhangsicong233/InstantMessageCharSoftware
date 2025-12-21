@@ -31,8 +31,8 @@ RegisterDialog::RegisterDialog(QWidget* parent)
   connect(ui->confirm_edit, &QLineEdit::editingFinished, this,
           [this]() { checkConfirmValid(); });
 
-  connect(ui->varify_edit, &QLineEdit::editingFinished, this,
-          [this]() { checkVarifyValid(); });
+  connect(ui->verify_edit, &QLineEdit::editingFinished, this,
+          [this]() { checkVerifyValid(); });
 
   ui->pass_visible->setCursor(Qt::PointingHandCursor);
   ui->confirm_visible->setCursor(Qt::PointingHandCursor);
@@ -97,7 +97,7 @@ void RegisterDialog::on_get_code_clicked() {
     QJsonObject json_obj;
     json_obj["email"] = email;
     HttpMgr::GetInstance()->PostHttpReq(
-        QUrl(gate_url_prefix + "/get_varifycode"), json_obj,
+        QUrl(gate_url_prefix + "/get_verifycode"), json_obj,
         ReqId::ID_GET_VARIFY_CODE, Modules::REGISTERMOD);
   } else {
     showTip(tr("邮箱地址不正确"), false);
@@ -232,8 +232,8 @@ bool RegisterDialog::checkPassValid() {
   return true;
 }
 
-bool RegisterDialog::checkVarifyValid() {
-  auto pass = ui->varify_edit->text();
+bool RegisterDialog::checkVerifyValid() {
+  auto pass = ui->verify_edit->text();
   if (pass.isEmpty()) {
     AddTipErr(TipErr::TIP_VARIFY_ERR, tr("验证码不能为空"));
 
@@ -348,7 +348,7 @@ void RegisterDialog::on_sure_btn_clicked() {
     return;
   }
 
-  if (ui->varify_edit->text() == "") {
+  if (ui->verify_edit->text() == "") {
     showTip(tr("验证码不能为空"), false);
 
     return;
@@ -360,7 +360,7 @@ void RegisterDialog::on_sure_btn_clicked() {
   json_obj["email"] = ui->email_edit->text();
   json_obj["passwd"] = xorString(ui->pass_edit->text());
   json_obj["confirm"] = xorString(ui->confirm_edit->text());
-  json_obj["varifycode"] = ui->varify_edit->text();
+  json_obj["verifycode"] = ui->verify_edit->text();
   HttpMgr::GetInstance()->PostHttpReq(QUrl(gate_url_prefix + "/user_register"),
                                       json_obj, ReqId::ID_REG_USER,
                                       Modules::REGISTERMOD);

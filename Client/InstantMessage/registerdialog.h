@@ -35,7 +35,7 @@ class RegisterDialog : public QDialog {
   bool checkUserValid();
   bool checkEmailValid();
   bool checkPassValid();
-  bool checkVarifyValid();
+  bool checkVerifyValid();
   bool checkConfirmValid();
   void showTip(QString str, bool b_Ok);
   void AddTipErr(TipErr te, QString tips);

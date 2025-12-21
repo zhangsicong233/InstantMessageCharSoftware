@@ -20,8 +20,8 @@ ResetDialog::ResetDialog(QWidget* parent)
   connect(ui->pwd_edit, &QLineEdit::editingFinished, this,
           [this]() { checkPassValid(); });
 
-  connect(ui->varify_edit, &QLineEdit::editingFinished, this,
-          [this]() { checkVarifyValid(); });
+  connect(ui->verify_edit, &QLineEdit::editingFinished, this,
+          [this]() { checkVerifyValid(); });
 
   // 连接reset相关信号和注册处理回调
   initHandlers();
@@ -37,8 +37,8 @@ void ResetDialog::on_return_btn_clicked() {
   emit switchLogin();
 }
 
-void ResetDialog::on_varify_btn_clicked() {
-  qDebug() << "receive varify btn clicked ";
+void ResetDialog::on_verify_btn_clicked() {
+  qDebug() << "receive verify btn clicked ";
   auto email = ui->email_edit->text();
   auto bcheck = checkEmailValid();
   if (!bcheck) {
@@ -48,7 +48,7 @@ void ResetDialog::on_varify_btn_clicked() {
   // 发送http请求获取验证码
   QJsonObject json_obj;
   json_obj["email"] = email;
-  HttpMgr::GetInstance()->PostHttpReq(QUrl(gate_url_prefix + "/get_varifycode"),
+  HttpMgr::GetInstance()->PostHttpReq(QUrl(gate_url_prefix + "/get_verifycode"),
                                       json_obj, ReqId::ID_GET_VARIFY_CODE,
                                       Modules::RESETMOD);
 }
@@ -134,8 +134,8 @@ bool ResetDialog::checkEmailValid() {
   return true;
 }
 
-bool ResetDialog::checkVarifyValid() {
-  auto pass = ui->varify_edit->text();
+bool ResetDialog::checkVerifyValid() {
+  auto pass = ui->verify_edit->text();
   if (pass.isEmpty()) {
     AddTipErr(TipErr::TIP_VARIFY_ERR, tr("验证码不能为空"));
     return false;
@@ -219,7 +219,7 @@ void ResetDialog::on_sure_btn_clicked() {
     return;
   }
 
-  valid = checkVarifyValid();
+  valid = checkVerifyValid();
   if (!valid) {
     return;
   }
@@ -229,7 +229,7 @@ void ResetDialog::on_sure_btn_clicked() {
   json_obj["user"] = ui->user_edit->text();
   json_obj["email"] = ui->email_edit->text();
   json_obj["passwd"] = xorString(ui->pwd_edit->text());
-  json_obj["varifycode"] = ui->varify_edit->text();
+  json_obj["verifycode"] = ui->verify_edit->text();
   HttpMgr::GetInstance()->PostHttpReq(QUrl(gate_url_prefix + "/reset_pwd"),
                                       json_obj, ReqId::ID_RESET_PWD,
                                       Modules::RESETMOD);

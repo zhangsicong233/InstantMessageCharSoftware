@@ -135,7 +135,7 @@
     <widget class="QWidget" name="widget_3" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QLabel" name="varify_lb">
+       <widget class="QLabel" name="verify_lb">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -154,7 +154,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="varify_edit">
+       <widget class="QLineEdit" name="verify_edit">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -170,7 +170,7 @@
        </widget>
       </item>
       <item>
-       <widget class="TimerBtn" name="varify_btn">
+       <widget class="TimerBtn" name="verify_btn">
         <property name="minimumSize">
          <size>
           <width>0</width>
