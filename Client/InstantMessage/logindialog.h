@@ -19,14 +19,18 @@ class LoginDialog : public QDialog {
 
  private:
   Ui::LoginDialog* ui;
-      QMap<TipErr, QString> _tip_errs;
+  QMap<TipErr, QString> _tip_errs;
+  QMap<ReqId, std::function<void(const QJsonObject&)>> _handlers;
+  int _uid;
+  QString _token;
 
   void initHead();
+  void initHttpHandlers();
   bool checkUserValid();
-      bool checkPwdValid();
-      bool enableBtn(bool enabled);
-      void showTip(QString str,bool b_ok);
-  void AddTipErr(TipErr te,QString tips);
+  bool checkPwdValid();
+  bool enableBtn(bool enabled);
+  void showTip(QString str, bool b_ok);
+  void AddTipErr(TipErr te, QString tips);
   void DelTipErr(TipErr te);
 
  private slots:
@@ -36,6 +40,7 @@ class LoginDialog : public QDialog {
  signals:
   void switchRegister();
   void switchReset();
+  void sig_connect_tcp(ServerInfo);
 };
 
 #endif  // LOGINDIALOG_H
